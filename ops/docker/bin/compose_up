@@ -9,6 +9,7 @@ then
     colorEnd='\e[0m'
 fi
 containerNames=("hxhronie_php" "hxhronie_phpmyadmin" "hxhronie_mysql")
+volumeName='docker_mysql_exceptions_data'
 
 for containerName in ${containerNames[*]}
 do
@@ -21,10 +22,10 @@ do
 	fi
 done
 
-if [[ $(docker volume ls | grep 'docker_mysql_php_data') ]];
+if [[ $(docker volume ls | grep $volumeName) ]];
 then
 	echo "Deleting container volume..."
-	docker volume rm docker_mysql_php_data
+	docker volume rm $volumeName
 fi
 
 # build php image
